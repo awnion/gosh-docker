@@ -23,7 +23,7 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: |
-            awnion/git-remote-gosh
+            name=ghcr.io/awnion/git-remote-gosh
           tags: |
             type=ref,event=branch
             type=ref,event=pr
