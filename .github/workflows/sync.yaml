@@ -27,7 +27,6 @@ jobs:
           set -xe
 
           env
-
           git fetch -a
           git pull
           git status
