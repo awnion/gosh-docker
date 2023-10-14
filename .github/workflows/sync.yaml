@@ -28,6 +28,8 @@ jobs:
 
           env
 
+          git fetch -a
+          git pull
           git status
           git remote -v
           git remote add gosh $GOSH_URL
@@ -35,7 +37,7 @@ jobs:
           git switch -C github_${{ github.ref_name }}
           git status
           ls -lA
-          git push -v gosh
+          RUST_BACKTRACE=1 git push -v gosh
           EOF
 
           cat gosh_sync.sh
