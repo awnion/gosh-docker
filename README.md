@@ -1,1 +1,1 @@
-# gosh-docker
+# GOSH Git remote helper Docker container
