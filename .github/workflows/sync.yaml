@@ -2,9 +2,9 @@ name: Sync with Gosh
 
 on:
   workflow_dispatch:
-  # push:
-  #   branches:
-  #     - main
+  push:
+    branches:
+      - main
 
 jobs:
   sync:
@@ -14,3 +14,14 @@ jobs:
       -
         name: Checkout
         uses: actions/checkout@v4
+
+      - name: Sync
+        env:
+          CONFIG_JSON: ${{ secrets.CONFIG_JSON }}
+          GOSH_URL: gosh://0:e87874f4a9e46f9f16e0c09c824204836b31d60b16db050a8c7fe329bb43d120/awnion/gosh-docker
+        run: |
+          echo "$CONFIG_JSON" >config.json
+          docker run --rm -v $(pwd):/workdir --workdir /workdir -v $(pwd)/config.json:/root/.gosh/config.json:ro git status
+          docker run --rm -v $(pwd):/workdir --workdir /workdir -v $(pwd)/config.json:/root/.gosh/config.json:ro git remote -v
+          docker run --rm -v $(pwd):/workdir --workdir /workdir -v $(pwd)/config.json:/root/.gosh/config.json:ro git remote add gosh $GOSH_URL
+          docker run --rm -v $(pwd):/workdir --workdir /workdir -v $(pwd)/config.json:/root/.gosh/config.json:ro git remote -v
