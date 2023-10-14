@@ -14,6 +14,6 @@ RUN git config --system --add safe.directory '*'
 # install gosh binaries
 RUN wget -O - https://raw.githubusercontent.com/gosh-sh/gosh/dev/install.sh | bash -s
 
-ENV PATH=$PATH:$HOME/.gosh
+ENV PATH=$PATH:/root/.gosh
 
 WORKDIR /workdir
