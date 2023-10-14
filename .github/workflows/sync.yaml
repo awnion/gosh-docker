@@ -31,7 +31,7 @@ jobs:
           git remote -v
           git switch -C github_${{ github.ref_name }}
           ls -lA
-          git push gosh
+          git push -v gosh
           EOF
 
           cat gosh_sync.sh
