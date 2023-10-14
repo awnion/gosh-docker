@@ -34,6 +34,7 @@ jobs:
           git push -v gosh
           EOF
 
+          env
           cat gosh_sync.sh
 
           docker run --rm -v "$(pwd)":/workdir -v "$(pwd)"/config.json:/root/.gosh/config.json:ro ghcr.io/awnion/git-remote-gosh bash gosh_sync.sh
