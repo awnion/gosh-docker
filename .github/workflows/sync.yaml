@@ -22,10 +22,11 @@ jobs:
         run: |
           echo "$CONFIG_JSON" >config.json
           docker pull ghcr.io/awnion/git-remote-gosh
-          alias DOCKER_GIT='docker run --rm -v $(pwd):/workdir -v $(pwd)/config.json:/root/.gosh/config.json:ro ghcr.io/awnion/git-remote-gosh git'
-          DOCKER_GIT status
-          DOCKER_GIT remote -v
-          DOCKER_GIT remote add gosh $GOSH_URL
-          DOCKER_GIT remote -v
-          DOCKER_GIT switch -C github_${{ github.ref_name }}
-          DOCKER_GIT push gosh
+          echo 'docker run --rm -v $(pwd):/workdir -v $(pwd)/config.json:/root/.gosh/config.json:ro ghcr.io/awnion/git-remote-gosh "$@"' >docker_git
+          chmod +x docker_git
+          ./docker_git git status
+          ./docker_git git remote -v
+          ./docker_git git remote add gosh $GOSH_URL
+          ./docker_git git remote -v
+          ./docker_git git switch -C github_${{ github.ref_name }}
+          ./docker_git git push gosh
